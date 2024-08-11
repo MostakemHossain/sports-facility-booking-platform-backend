@@ -7,7 +7,7 @@ const handleDuplicateError = (err: any): TGenericErrorResponse => {
   const errorSources: TErrorSource = [
     {
       path: "",
-      message: `${extractedMessage} is Already exists`,
+      message: err.message,
     },
   ];
   const statusCode = 400;
