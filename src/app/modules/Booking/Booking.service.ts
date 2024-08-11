@@ -79,8 +79,14 @@ const cancelABookingByUser = async (id: string, user: any) => {
   return result;
 };
 
+const viewBookingByAdmin = async () => {
+  const result = await Booking.find().populate("facility user");
+  return result;
+};
+
 export const bookingService = {
   createBooking,
   viewBookingByUser,
   cancelABookingByUser,
+  viewBookingByAdmin,
 };

@@ -28,6 +28,18 @@ const viewBookingByUser = catchAsync(
     });
   }
 );
+const viewBookingByAdmin = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const user = req.user;
+    const result = await bookingService.viewBookingByAdmin();
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Bookings retrieved successfully",
+      data: result,
+    });
+  }
+);
 const cancelABookingByUser = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
     const user = req.user;
@@ -48,4 +60,5 @@ export const bookingController = {
   createBooking,
   viewBookingByUser,
   cancelABookingByUser,
+  viewBookingByAdmin,
 };
