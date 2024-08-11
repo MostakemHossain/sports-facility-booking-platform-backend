@@ -12,5 +12,6 @@ router.post(
   bookingController.createBooking
 );
 router.get("/user", auth("user"), bookingController.viewBookingByUser);
+router.delete("/:id", auth("user"), bookingController.cancelABookingByUser);
 
 export const bookingRoutes = router;

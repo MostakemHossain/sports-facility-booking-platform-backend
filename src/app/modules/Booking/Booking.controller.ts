@@ -28,8 +28,24 @@ const viewBookingByUser = catchAsync(
     });
   }
 );
+const cancelABookingByUser = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const user = req.user;
+    const result = await bookingService.cancelABookingByUser(
+      req.params.id,
+      user
+    );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Bookings cancelled successfully",
+      data: result,
+    });
+  }
+);
 
 export const bookingController = {
   createBooking,
   viewBookingByUser,
+  cancelABookingByUser,
 };

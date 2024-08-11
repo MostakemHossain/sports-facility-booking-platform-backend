@@ -53,12 +53,34 @@ const createBooking = async (payload: TBooking, user: any) => {
 };
 
 const viewBookingByUser = async (user: any) => {
-  const result = await Booking.find({ user: user.id })
-    .populate("facility");
+  const result = await Booking.find({ user: user.id }).populate("facility");
+  return result;
+};
+
+const cancelABookingByUser = async (id: string, user: any) => {
+  const verifyUserBookingIdAndToken = await Booking.findOne({
+    _id: id,
+    user: user.id,
+  });
+
+  if (!verifyUserBookingIdAndToken) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "You are not authorized to cancel this booking"
+    );
+  }
+
+  const result = await Booking.findByIdAndUpdate(
+    id,
+    { isBooked: "canceled" },
+    { new: true }
+  ).populate("facility");
+
   return result;
 };
 
 export const bookingService = {
   createBooking,
   viewBookingByUser,
+  cancelABookingByUser,
 };
