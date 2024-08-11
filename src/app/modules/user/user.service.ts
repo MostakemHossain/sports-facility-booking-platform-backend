@@ -37,6 +37,7 @@ const loginUser = async (payload: TLoginUser) => {
     throw new AppError(httpStatus.BAD_REQUEST, "Incorrect email and password");
   }
   const userInfo = {
+    id: isUserAlreadyExists._id,
     email: isUserAlreadyExists.email,
     role: isUserAlreadyExists.role,
   };
