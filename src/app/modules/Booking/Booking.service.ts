@@ -52,6 +52,13 @@ const createBooking = async (payload: TBooking, user: any) => {
   return result;
 };
 
+const viewBookingByUser = async (user: any) => {
+  const result = await Booking.find({ user: user.id })
+    .populate("facility");
+  return result;
+};
+
 export const bookingService = {
   createBooking,
+  viewBookingByUser,
 };
