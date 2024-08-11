@@ -15,7 +15,9 @@ app.use(cors());
 app.use("/api", router);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.json({
+    message: "Sports facility Booking platform........",
+  });
 });
 
 // global error handler
