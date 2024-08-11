@@ -17,7 +17,6 @@ const auth = (...roles: string[]) => {
         throw new AppError(httpStatus.BAD_REQUEST, "You are not authorized");
       }
 
-      
       const token = authorizationHeader.split(" ")[1];
 
       if (!token) {
@@ -32,7 +31,7 @@ const auth = (...roles: string[]) => {
       req.user = verifiedUser;
 
       if (roles.length && !roles.includes(verifiedUser.role)) {
-        throw new AppError(httpStatus.FORBIDDEN, "You are not authorized");
+        throw new AppError(401, "You have no access to this route");
       }
 
       next();
