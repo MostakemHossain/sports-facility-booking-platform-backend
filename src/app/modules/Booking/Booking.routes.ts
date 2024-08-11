@@ -11,9 +11,13 @@ router.post(
   validateRequest(bookingValidation.createBookingValidationSchema),
   bookingController.createBooking
 );
-router.get("/user", auth("user"), bookingController.viewBookingByUser);
-router.get("/", auth("admin"), bookingController.viewBookingByAdmin);
+router.get("/bookings/user", auth("user"), bookingController.viewBookingByUser);
+router.get("/bookings/", auth("admin"), bookingController.viewBookingByAdmin);
 router.get("/check-availability", bookingController.checkBookingAvailability);
-router.delete("/:id", auth("user"), bookingController.cancelABookingByUser);
+router.delete(
+  "bookings/:id",
+  auth("user"),
+  bookingController.cancelABookingByUser
+);
 
 export const bookingRoutes = router;

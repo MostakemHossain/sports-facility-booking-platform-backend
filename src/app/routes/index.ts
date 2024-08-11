@@ -15,7 +15,7 @@ const moduleRoutes = [
     route: facilityRoutes,
   },
   {
-    path: "/bookings",
+    path: "/",
     route: bookingRoutes,
   },
 ];
