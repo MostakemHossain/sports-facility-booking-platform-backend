@@ -5,6 +5,14 @@ const createFacility = async (payload: TFacility) => {
   const result = await Facility.create(payload);
   return result;
 };
+
+const updateFacility = async (payload: Partial<TFacility>, id: string) => {
+  const result = await Facility.findByIdAndUpdate(id, payload, {
+    new: true,
+  });
+  return result;
+};
 export const facilityService = {
   createFacility,
+  updateFacility,
 };

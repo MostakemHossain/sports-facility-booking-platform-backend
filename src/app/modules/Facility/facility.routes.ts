@@ -8,8 +8,14 @@ const router = express.Router();
 router.post(
   "/facility",
   auth("admin"),
-  validateRequest(facilityValidation.createFacility),
+  validateRequest(facilityValidation.createFacilityValidationSchema),
   facilityController.createFacility
+);
+router.put(
+  "/facility/:facilityId",
+  auth("admin"),
+  validateRequest(facilityValidation.updateFacilityValidationSchema),
+  facilityController.updateFacility
 );
 
 export const facilityRoutes = router;
