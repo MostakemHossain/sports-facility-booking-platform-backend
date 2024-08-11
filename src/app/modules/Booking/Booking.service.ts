@@ -84,9 +84,26 @@ const viewBookingByAdmin = async () => {
   return result;
 };
 
+const checkBookingAvailability = async (req: any) => {
+  const { date } = req.query;
+  const queryDate = date ? new Date(date as string) : new Date();
+
+  const bookings = await Booking.find({
+    date: queryDate.toISOString().split("T")[0],
+  }).sort("startTime");
+
+  const availableTimeSlots: any = bookings.map((booking) => ({
+    startTime: booking.startTime,
+    endTime: booking.endTime,
+  }));
+
+  return availableTimeSlots;
+};
+
 export const bookingService = {
   createBooking,
   viewBookingByUser,
   cancelABookingByUser,
   viewBookingByAdmin,
+  checkBookingAvailability,
 };

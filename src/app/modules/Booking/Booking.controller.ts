@@ -55,10 +55,23 @@ const cancelABookingByUser = catchAsync(
     });
   }
 );
+const checkBookingAvailability = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const user = req.user;
+    const result = await bookingService.checkBookingAvailability(req);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Availability checked successfully",
+      data: result,
+    });
+  }
+);
 
 export const bookingController = {
   createBooking,
   viewBookingByUser,
   cancelABookingByUser,
   viewBookingByAdmin,
+  checkBookingAvailability,
 };

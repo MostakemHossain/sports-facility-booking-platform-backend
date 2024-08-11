@@ -13,6 +13,7 @@ router.post(
 );
 router.get("/user", auth("user"), bookingController.viewBookingByUser);
 router.get("/", auth("admin"), bookingController.viewBookingByAdmin);
+router.get("/check-availability", bookingController.checkBookingAvailability);
 router.delete("/:id", auth("user"), bookingController.cancelABookingByUser);
 
 export const bookingRoutes = router;
