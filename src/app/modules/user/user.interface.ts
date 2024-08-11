@@ -5,4 +5,12 @@ export type TUser = {
   phone: string;
   role: "admin" | "user";
   address: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: string;
+};
+
+export type TLoginUser = {
+  email: string;
+  password: string;
 };

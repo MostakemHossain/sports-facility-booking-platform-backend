@@ -6,6 +6,7 @@ const sendResponse = <T>(
     statusCode: number;
     success: boolean;
     message: string;
+    token?: string;
     meta?: {
       page: number;
       limit: number;
@@ -18,6 +19,7 @@ const sendResponse = <T>(
     success: jsonData.success,
     statusCode: jsonData.statusCode,
     message: jsonData.message,
+    token: jsonData.token || null || undefined,
     meta: jsonData.meta || null || undefined,
     data: jsonData.data || null || undefined,
   });
