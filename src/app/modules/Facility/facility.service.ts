@@ -12,6 +12,18 @@ const updateFacility = async (payload: Partial<TFacility>, id: string) => {
   });
   return result;
 };
+const deleteFacility = async (id: string) => {
+  const result = await Facility.findByIdAndUpdate(
+    id,
+    {
+      isDeleted: true,
+    },
+    {
+      new: true,
+    }
+  );
+  return result;
+};
 
 const getAllFacility = async () => {
   const result = await Facility.find();
@@ -21,4 +33,5 @@ export const facilityService = {
   createFacility,
   updateFacility,
   getAllFacility,
+  deleteFacility,
 };
