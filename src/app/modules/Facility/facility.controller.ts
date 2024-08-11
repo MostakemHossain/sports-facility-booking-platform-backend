@@ -24,8 +24,18 @@ const updateFacility = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllFacility = catchAsync(async (req, res) => {
+  const result = await facilityService.getAllFacility();
+  sendResponse(res, {
+    success: true,
+    message: "Facilities retrieved successfully",
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
 
 export const facilityController = {
   createFacility,
   updateFacility,
+  getAllFacility,
 };

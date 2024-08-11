@@ -17,5 +17,6 @@ router.put(
   validateRequest(facilityValidation.updateFacilityValidationSchema),
   facilityController.updateFacility
 );
+router.get("/facility", facilityController.getAllFacility);
 
 export const facilityRoutes = router;

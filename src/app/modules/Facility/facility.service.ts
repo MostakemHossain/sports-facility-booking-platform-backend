@@ -12,7 +12,13 @@ const updateFacility = async (payload: Partial<TFacility>, id: string) => {
   });
   return result;
 };
+
+const getAllFacility = async () => {
+  const result = await Facility.find();
+  return result;
+};
 export const facilityService = {
   createFacility,
   updateFacility,
+  getAllFacility,
 };
