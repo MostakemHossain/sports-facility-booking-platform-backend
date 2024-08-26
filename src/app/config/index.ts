@@ -12,4 +12,7 @@ export default {
   jwt__refresh_secret: process.env.JWT_REFRESH_SECRET,
   jwt__access_expire_in: process.env.JWT_ACCESS_EXPIRE_IN,
   jwt__refresh_expire_in: process.env.JWT_REFRESH_EXPIRE_IN,
+  super_admin_password: process.env.SUPER_ADMIN_PASSWORD,
+  super_admin_email: process.env.SUPER_ADMIN_EMAIL,
+  super_admin_name: process.env.SUPER_ADMIN_NAME,
 };
