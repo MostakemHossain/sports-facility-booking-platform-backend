@@ -27,6 +27,9 @@ const auth = (...roles: string[]) => {
         token,
         config.jwt__access_secret as string
       );
+      if (!verifiedUser) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized");
+      }
 
       req.user = verifiedUser;
 

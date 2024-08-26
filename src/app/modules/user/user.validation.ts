@@ -18,9 +18,6 @@ export const createUserValidationSchema = z.object({
     phone: z.string({
       required_error: "Phone number is required",
     }),
-    role: z.enum(["admin", "user"], {
-      required_error: "Role is required",
-    }),
     address: z.string({
       required_error: "Address is required",
     }),

@@ -1,7 +1,7 @@
+import bcrypt from "bcrypt";
 import { Schema, model } from "mongoose";
-import { TUser } from "./user.interface";
 import config from "../../config";
-import bcrypt from "bcrypt"
+import { TUser } from "./user.interface";
 
 const UserSchema = new Schema<TUser>(
   {
@@ -28,7 +28,7 @@ const UserSchema = new Schema<TUser>(
     role: {
       type: String,
       enum: ["admin", "user"],
-      required: [true, "Role is required"],
+      default: "user",
     },
     address: {
       type: String,
