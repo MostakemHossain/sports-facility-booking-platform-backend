@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import httpStatus from "http-status";
 import config from "../../config";
 import AppError from "../../errors/appError";
+import { fileUploader } from "../../helpers/fileUploads";
 import { jwtHelpers } from "../../helpers/jwtHelper";
 import { TLoginUser, TUser } from "./user.interface";
 import { User } from "./user.model";
@@ -127,6 +128,35 @@ const getMe = async (email: string) => {
   const user = await User.findOne({ email });
   return user;
 };
+const updateMyProfile = async (user: any, req: any) => {
+  const userData = await User.findById(user.id);
+
+  if (!userData) {
+    throw new AppError(httpStatus.BAD_REQUEST, "User does not exist!");
+  }
+
+  const file = req.file;
+
+  if (file) {
+    const uploadedProfileImage = await fileUploader.uploadToCloudinary(file);
+    if (uploadedProfileImage && uploadedProfileImage.secure_url) {
+      req.body.photo = uploadedProfileImage.secure_url;
+    } else {
+      throw new AppError(
+        httpStatus.BAD_REQUEST,
+        "Profile image upload failed!"
+      );
+    }
+  }
+  const result = await User.findByIdAndUpdate(
+    user.id,
+    { $set: req.body },
+    { new: true, runValidators: true }
+  );
+
+  return result;
+};
+
 export const userService = {
   createUser,
   loginUser,
@@ -135,4 +165,5 @@ export const userService = {
   updateUserRole,
   deleteUser,
   getMe,
+  updateMyProfile,
 };
