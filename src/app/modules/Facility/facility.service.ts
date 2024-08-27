@@ -34,9 +34,15 @@ const getAllFacility = async () => {
   }
   return result;
 };
+const getSingleFacility = async (id: string) => {
+  const result = await Facility.findById(id);
+ 
+  return result;
+};
 export const facilityService = {
   createFacility,
   updateFacility,
   getAllFacility,
   deleteFacility,
+  getSingleFacility
 };

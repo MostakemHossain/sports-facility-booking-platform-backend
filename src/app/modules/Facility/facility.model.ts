@@ -18,6 +18,10 @@ const FacilitySchema = new Schema<TFacility>({
     type: String,
     required: [true, "Facility location is required"],
   },
+  photo: {
+    type: String,
+    required: [true, "Photo required"],
+  },
   isDeleted: {
     type: Boolean,
     default: false,
