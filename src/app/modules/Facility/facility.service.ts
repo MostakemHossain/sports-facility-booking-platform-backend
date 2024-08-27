@@ -28,7 +28,9 @@ const deleteFacility = async (id: string) => {
 };
 
 const getAllFacility = async () => {
-  const result = await Facility.find();
+  const result = await Facility.find({
+    isDeleted: false,
+  });
   if (result.length === 0) {
     throw new AppError(httpStatus.NOT_FOUND, "No data found");
   }
@@ -36,7 +38,7 @@ const getAllFacility = async () => {
 };
 const getSingleFacility = async (id: string) => {
   const result = await Facility.findById(id);
- 
+
   return result;
 };
 export const facilityService = {
@@ -44,5 +46,5 @@ export const facilityService = {
   updateFacility,
   getAllFacility,
   deleteFacility,
-  getSingleFacility
+  getSingleFacility,
 };

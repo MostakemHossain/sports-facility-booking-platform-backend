@@ -22,7 +22,15 @@ router.delete(
   auth("admin"),
   facilityController.deleteFacility
 );
-router.get("/facility", facilityController.getAllFacility);
-router.get("/facility/:id", facilityController.getSingleFacility);
+router.get(
+  "/facility",
+  auth("admin", "super-admin"),
+  facilityController.getAllFacility
+);
+router.get(
+  "/facility/:id",
+  auth("admin", "super-admin"),
+  facilityController.getSingleFacility
+);
 
 export const facilityRoutes = router;

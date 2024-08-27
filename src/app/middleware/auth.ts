@@ -16,6 +16,7 @@ const auth = (...roles: string[]) => {
       if (!authorizationHeader) {
         throw new AppError(httpStatus.BAD_REQUEST, "You are not authorized");
       }
+      console.log("");
 
       const token = authorizationHeader.split(" ")[1];
 
