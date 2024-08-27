@@ -65,13 +65,24 @@ const updateUserRole = catchAsync(
     });
   }
 );
+const getMe = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const result = await userService.getMe(req.user.email);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "My profile retrieved successfully",
+      data: result,
+    });
+  }
+);
 const deleteUser = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
     const result = await userService.deleteUser(req.params.id);
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Users deleted successfully",
+      message: "User deleted successfully",
       data: result,
     });
   }
@@ -84,4 +95,5 @@ export const userController = {
   getAllUsers,
   updateUserRole,
   deleteUser,
+  getMe,
 };

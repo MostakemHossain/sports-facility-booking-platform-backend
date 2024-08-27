@@ -5,6 +5,7 @@ export type TUser = {
   phone: string;
   role: "admin" | "user" | "super-admin";
   address: string;
+  photo: string;
   createdAt: string;
   updatedAt: string;
   __v: string;

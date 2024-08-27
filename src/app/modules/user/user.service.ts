@@ -122,6 +122,11 @@ const deleteUser = async (id: string) => {
   const userToDelete = await User.findByIdAndDelete(id);
   return userToDelete;
 };
+
+const getMe = async (email: string) => {
+  const user = await User.findOne({ email });
+  return user;
+};
 export const userService = {
   createUser,
   loginUser,
@@ -129,4 +134,5 @@ export const userService = {
   getAllUsers,
   updateUserRole,
   deleteUser,
+  getMe,
 };

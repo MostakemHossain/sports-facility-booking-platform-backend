@@ -31,5 +31,6 @@ router.delete(
   auth("admin", "super-admin"),
   userController.deleteUser
 );
+router.get("/me", auth("admin", "super-admin", "user"), userController.getMe);
 
 export const userRoutes = router;

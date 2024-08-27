@@ -27,13 +27,16 @@ const UserSchema = new Schema<TUser>(
     },
     role: {
       type: String,
-      enum: ["super-admin","admin", "user"],
+      enum: ["super-admin", "admin", "user"],
       default: "user",
     },
     address: {
       type: String,
       required: [true, "Address is required"],
       trim: true,
+    },
+    photo: {
+      type: String,
     },
   },
   {
