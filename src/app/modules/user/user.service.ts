@@ -118,10 +118,15 @@ const updateUserRole = async (
   return updatedUser;
 };
 
+const deleteUser = async (id: string) => {
+  const userToDelete = await User.findByIdAndDelete(id);
+  return userToDelete;
+};
 export const userService = {
   createUser,
   loginUser,
   refreshToken,
   getAllUsers,
   updateUserRole,
+  deleteUser,
 };

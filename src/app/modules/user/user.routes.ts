@@ -26,5 +26,10 @@ router.put(
   auth("admin", "super-admin"),
   userController.updateUserRole
 );
+router.delete(
+  "/delete/:id",
+  auth("admin", "super-admin"),
+  userController.deleteUser
+);
 
 export const userRoutes = router;
