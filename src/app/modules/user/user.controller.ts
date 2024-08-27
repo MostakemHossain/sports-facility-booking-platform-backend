@@ -50,10 +50,26 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const updateUserRole = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const result = await userService.updateUserRole(
+      req.body,
+      req.params.id,
+      req.user.role
+    );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Users updated successfully",
+      data: result,
+    });
+  }
+);
 
 export const userController = {
   createUser,
   loginUser,
   refreshToken,
   getAllUsers,
+  updateUserRole,
 };

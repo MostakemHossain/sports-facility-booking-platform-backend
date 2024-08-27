@@ -97,9 +97,31 @@ const getAllUsers = async () => {
   return result;
 };
 
+const updateUserRole = async (
+  payload: { role: string },
+  id: string,
+  role: string
+) => {
+  const userToUpdate = await User.findById(id);
+  if (!userToUpdate) {
+    throw new Error("User not found");
+  }
+  if (role === "admin" && payload.role === "super-admin") {
+    throw new Error("Admins cannot update a super admin's role");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    id,
+    { role: payload.role },
+    { new: true }
+  );
+  return updatedUser;
+};
+
 export const userService = {
   createUser,
   loginUser,
   refreshToken,
   getAllUsers,
+  updateUserRole,
 };

@@ -21,5 +21,10 @@ router.get(
   auth("admin", "super-admin"),
   userController.getAllUsers
 );
+router.put(
+  "/update/:id",
+  auth("admin", "super-admin"),
+  userController.updateUserRole
+);
 
 export const userRoutes = router;
