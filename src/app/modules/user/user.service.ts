@@ -92,8 +92,14 @@ const refreshToken = async (token: string) => {
   };
 };
 
+const getAllUsers = async () => {
+  const result = await User.find();
+  return result;
+};
+
 export const userService = {
   createUser,
   loginUser,
   refreshToken,
+  getAllUsers,
 };
