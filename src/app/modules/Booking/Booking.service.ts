@@ -3,6 +3,7 @@ import AppError from "../../errors/appError";
 import { Facility } from "../Facility/facility.model";
 import { TBooking } from "./Booking.interface";
 import Booking from "./Booking.model";
+import { generateTimeSlots } from "../../utils/generateTimeSlots";
 
 const createBooking = async (payload: TBooking, user: any) => {
   const facility = await Facility.findById(payload.facility);
@@ -84,18 +85,41 @@ const viewBookingByAdmin = async () => {
   return result;
 };
 
+
+
 const checkBookingAvailability = async (req: any) => {
-  const { date } = req.query;
+  const { date, facility } = req.query;
+
+  if (!facility) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Facility parameter is required"
+    );
+  }
+
   const queryDate = date ? new Date(date as string) : new Date();
 
   const bookings = await Booking.find({
     date: queryDate.toISOString().split("T")[0],
-  }).sort("startTime");
+    facility: facility,
+  });
 
-  const availableTimeSlots: any = bookings.map((booking) => ({
-    startTime: booking.startTime,
-    endTime: booking.endTime,
-  }));
+  const allTimeSlots = generateTimeSlots();
+
+  const availableTimeSlots = allTimeSlots.filter((slot) => {
+    return !bookings.some((booking) => {
+      return (
+        booking.startTime === slot.startTime && booking.endTime === slot.endTime
+      );
+    });
+  });
+
+  if (availableTimeSlots.length === 0) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      "No available time slots for the selected date and facility."
+    );
+  }
 
   return availableTimeSlots;
 };

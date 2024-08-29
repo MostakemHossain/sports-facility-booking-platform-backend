@@ -22,14 +22,10 @@ router.delete(
   auth("admin"),
   facilityController.deleteFacility
 );
-router.get(
-  "/facility",
-  auth("admin", "super-admin"),
-  facilityController.getAllFacility
-);
+router.get("/facility", facilityController.getAllFacility);
 router.get(
   "/facility/:id",
-  auth("admin", "super-admin"),
+  auth("admin", "super-admin", "user"),
   facilityController.getSingleFacility
 );
 
