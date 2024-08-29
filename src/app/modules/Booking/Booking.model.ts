@@ -30,8 +30,8 @@ const BookingSchema: Schema<TBooking> = new Schema({
   },
   isBooked: {
     type: String,
-    enum: ["confirmed", "unconfirmed", "canceled"],
-    default: "confirmed",
+    enum: ["confirmed", "pending", "canceled"],
+    default: "pending",
   },
 });
 

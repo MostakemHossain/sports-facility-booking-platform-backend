@@ -6,7 +6,7 @@ import { bookingValidation } from "./Booking.validation";
 const router = express.Router();
 
 router.post(
-  "/",
+  "/bookings/create-booking",
   auth("user"),
   validateRequest(bookingValidation.createBookingValidationSchema),
   bookingController.createBooking
