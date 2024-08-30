@@ -1,9 +1,9 @@
 import httpStatus from "http-status";
 import AppError from "../../errors/appError";
+import { generateTimeSlots } from "../../utils/generateTimeSlots";
 import { Facility } from "../Facility/facility.model";
 import { TBooking } from "./Booking.interface";
 import Booking from "./Booking.model";
-import { generateTimeSlots } from "../../utils/generateTimeSlots";
 
 const createBooking = async (payload: TBooking, user: any) => {
   const facility = await Facility.findById(payload.facility);
@@ -85,8 +85,6 @@ const viewBookingByAdmin = async () => {
   return result;
 };
 
-
-
 const checkBookingAvailability = async (req: any) => {
   const { date, facility } = req.query;
 
@@ -124,10 +122,16 @@ const checkBookingAvailability = async (req: any) => {
   return availableTimeSlots;
 };
 
+const updateBookingByAdmin = (payload: any, id: string) => {
+  return Booking.findByIdAndUpdate(id, payload, { new: true });
+  
+};
+
 export const bookingService = {
   createBooking,
   viewBookingByUser,
   cancelABookingByUser,
   viewBookingByAdmin,
   checkBookingAvailability,
+  updateBookingByAdmin,
 };

@@ -67,6 +67,21 @@ const checkBookingAvailability = catchAsync(
     });
   }
 );
+const updateBookingByAdmin = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const user = req.user;
+    const result = await bookingService.updateBookingByAdmin(
+      req.body,
+      req.params.id
+    );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Booking updated successfully",
+      data: result,
+    });
+  }
+);
 
 export const bookingController = {
   createBooking,
@@ -74,4 +89,5 @@ export const bookingController = {
   cancelABookingByUser,
   viewBookingByAdmin,
   checkBookingAvailability,
+  updateBookingByAdmin,
 };
