@@ -123,8 +123,13 @@ const checkBookingAvailability = async (req: any) => {
 };
 
 const updateBookingByAdmin = (payload: any, id: string) => {
-  return Booking.findByIdAndUpdate(id, payload, { new: true });
-  
+  return Booking.findByIdAndUpdate(
+    id,
+    {
+      isBooked: String(payload),
+    },
+    { new: true }
+  );
 };
 
 export const bookingService = {

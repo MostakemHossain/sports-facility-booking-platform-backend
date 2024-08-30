@@ -24,7 +24,7 @@ router.delete(
   bookingController.cancelABookingByUser
 );
 router.put(
-  "/bookings/admin/status",
+  "/bookings/admin/status/:id",
   auth("admin"),
   bookingController.updateBookingByAdmin
 );

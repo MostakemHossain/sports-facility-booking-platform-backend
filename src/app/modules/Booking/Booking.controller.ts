@@ -69,9 +69,8 @@ const checkBookingAvailability = catchAsync(
 );
 const updateBookingByAdmin = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
-    const user = req.user;
     const result = await bookingService.updateBookingByAdmin(
-      req.body,
+      req.body?.status?.status,
       req.params.id
     );
     sendResponse(res, {
