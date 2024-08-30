@@ -34,7 +34,7 @@ const deleteFacility = catchAsync(async (req, res) => {
   });
 });
 const getAllFacility = catchAsync(async (req, res) => {
-  const result = await facilityService.getAllFacility();
+  const result = await facilityService.getAllFacility(req);
   sendResponse(res, {
     success: true,
     message: "Facilities retrieved successfully",

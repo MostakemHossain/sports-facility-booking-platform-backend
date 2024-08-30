@@ -1,4 +1,5 @@
 import httpStatus from "http-status";
+import QueryBuilder from "../../Query/QueryBuilder";
 import AppError from "../../errors/appError";
 import { TFacility } from "./facility.interface";
 import { Facility } from "./facility.model";
@@ -27,13 +28,28 @@ const deleteFacility = async (id: string) => {
   return result;
 };
 
-const getAllFacility = async () => {
-  const result = await Facility.find({
-    isDeleted: false,
-  });
+const getAllFacility = async (req: any) => {
+  const query = req.query;
+  const queryBuilder = new QueryBuilder(
+    Facility.find({ isDeleted: false }),
+    query
+  );
+
+  queryBuilder
+    .search(["name", "location", "description"])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await queryBuilder.modelQuery.exec();
+
+  const total = await queryBuilder.countTotal();
+
   if (result.length === 0) {
     throw new AppError(httpStatus.NOT_FOUND, "No data found");
   }
+
   return result;
 };
 const getSingleFacility = async (id: string) => {
