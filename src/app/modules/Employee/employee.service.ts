@@ -15,6 +15,12 @@ const createEmployee = async (req: any) => {
   return employee;
 };
 
+const getAllEmployee = async () => {
+  const employees = await Employee.find();
+  return employees;
+};
+
 export const employeeService = {
   createEmployee,
+  getAllEmployee,
 };

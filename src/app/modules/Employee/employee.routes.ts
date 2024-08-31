@@ -6,12 +6,12 @@ const router = express.Router();
 
 router.post(
   "/create-employee",
-  //   auth("admin", "super-admin"),
+  auth("admin", "super-admin"),
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = JSON.parse(req.body.data);
     return employeeController.createEmployee(req, res, next);
   }
 );
-
+router.get("/get", employeeController.getAllEmployee);
 export const employeeRoutes = router;

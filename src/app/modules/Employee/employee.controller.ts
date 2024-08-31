@@ -13,7 +13,17 @@ const createEmployee = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getAllEmployee = catchAsync(async (req: Request, res: Response) => {
+  const result = await employeeService.getAllEmployee();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Employee retrieved successfully",
+    data: result,
+  });
+});
 
-export const employeeController={
-    createEmployee
-}
+export const employeeController = {
+  createEmployee,
+  getAllEmployee
+};
