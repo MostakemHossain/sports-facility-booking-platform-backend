@@ -14,4 +14,5 @@ router.post(
   }
 );
 router.get("/get", employeeController.getAllEmployee);
+router.get("/:id", employeeController.deleteEmployee);
 export const employeeRoutes = router;

@@ -19,8 +19,13 @@ const getAllEmployee = async () => {
   const employees = await Employee.find();
   return employees;
 };
+const deleteEmployee = async (id: string) => {
+  const result = await Employee.findByIdAndDelete(id);
+  return result;
+};
 
 export const employeeService = {
   createEmployee,
   getAllEmployee,
+  deleteEmployee,
 };
