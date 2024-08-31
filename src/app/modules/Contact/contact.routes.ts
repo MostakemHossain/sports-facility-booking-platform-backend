@@ -1,4 +1,5 @@
 import express from "express";
+import auth from "../../middleware/auth";
 import validateRequest from "../../middleware/validateRequest";
 import { contactController } from "./contact.controller";
 import { contactValidation } from "./contact.validation";
@@ -9,7 +10,7 @@ router.post(
   validateRequest(contactValidation.createContact),
   contactController.createContact
 );
-router.get("/", contactController.getAllContact);
+router.get("/", auth("admin", "super-admin"), contactController.getAllContact);
 router.delete("/:id", contactController.deleteContact);
 
 export const contactRoutes = router;
