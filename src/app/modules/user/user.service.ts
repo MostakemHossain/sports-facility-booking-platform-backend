@@ -40,7 +40,7 @@ const loginUser = async (payload: TLoginUser) => {
   const userInfo = {
     id: isUserAlreadyExists._id,
     email: isUserAlreadyExists.email,
-    role: isUserAlreadyExists.role,
+    role: isUserAlreadyExists.role || "user",
   };
   const token = await jwtHelpers.generateToken(
     userInfo,
@@ -157,6 +157,30 @@ const updateMyProfile = async (user: any, req: any) => {
   return result;
 };
 
+const googleLoginUser = async (payload: TLoginUser) => {
+  const userInfo = {
+    id: payload.id,
+    email: payload.email,
+    role: "user",
+  };
+  const token = await jwtHelpers.generateToken(
+    userInfo,
+    config.jwt__access_secret as string,
+    config.jwt__access_expire_in as string
+  );
+  const refreshToken = jwtHelpers.generateToken(
+    userInfo,
+    config.jwt__refresh_secret as string,
+    config.jwt__refresh_expire_in as string
+  );
+
+  return {
+    token,
+    refreshToken,
+    data: userInfo,
+  };
+};
+
 export const userService = {
   createUser,
   loginUser,
@@ -166,4 +190,5 @@ export const userService = {
   deleteUser,
   getMe,
   updateMyProfile,
+  googleLoginUser,
 };

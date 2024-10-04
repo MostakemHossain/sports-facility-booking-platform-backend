@@ -98,6 +98,17 @@ const updateMyProfile = catchAsync(
     });
   }
 );
+const googleLoginUser = catchAsync(
+  async (req: Request & { user?: any }, res: Response) => {
+    const result = await userService.googleLoginUser(req.body);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Login successfully",
+      data: result,
+    });
+  }
+);
 
 export const userController = {
   createUser,
@@ -108,4 +119,5 @@ export const userController = {
   deleteUser,
   getMe,
   updateMyProfile,
+  googleLoginUser,
 };

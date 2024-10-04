@@ -1,4 +1,5 @@
 export type TUser = {
+  id: string;
   name: string;
   email: string;
   password: string;
@@ -12,6 +13,7 @@ export type TUser = {
 };
 
 export type TLoginUser = {
+  id: string;
   email: string;
   password: string;
 };

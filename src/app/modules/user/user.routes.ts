@@ -16,6 +16,7 @@ router.post(
   validateRequest(userValidation.loginUserValidationSchema),
   userController.loginUser
 );
+router.post("/google-login", userController.googleLoginUser);
 router.post("/refresh-token", userController.refreshToken);
 router.get(
   "/get-all-users",
