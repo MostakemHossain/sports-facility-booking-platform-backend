@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import bcrypt from "bcrypt";
 import httpStatus from "http-status";
 import config from "../../config";
@@ -40,6 +43,7 @@ const loginUser = async (payload: TLoginUser) => {
   const userInfo = {
     id: isUserAlreadyExists._id,
     email: isUserAlreadyExists.email,
+    name: isUserAlreadyExists.name,
     role: isUserAlreadyExists.role || "user",
   };
   const token = await jwtHelpers.generateToken(
@@ -160,6 +164,7 @@ const updateMyProfile = async (user: any, req: any) => {
 const googleLoginUser = async (payload: TLoginUser) => {
   const userInfo = {
     id: payload.id,
+    name: payload.name,
     email: payload.email,
     role: "user",
   };

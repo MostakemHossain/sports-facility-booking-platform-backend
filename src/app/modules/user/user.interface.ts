@@ -14,6 +14,7 @@ export type TUser = {
 
 export type TLoginUser = {
   id: string;
+  name?: string;
   email: string;
   password: string;
 };
