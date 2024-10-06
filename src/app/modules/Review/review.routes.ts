@@ -10,5 +10,7 @@ router.post(
   validateRequest(reviewValidation.createReviewValidationSchema),
   reviewController.createReview
 );
+router.get("/my-reviews/:id", reviewController.getMyReviews);
+router.delete("/my-reviews/:id", reviewController.deleteMyReviews);
 
 export const reviewRoutes = router;

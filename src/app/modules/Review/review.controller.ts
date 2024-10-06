@@ -12,7 +12,27 @@ const createReview = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getMyReviews = catchAsync(async (req, res) => {
+  const result = await reviewService.getMyReviews(req.params.id);
+  sendResponse(res, {
+    success: true,
+    message: "My Review is Retrieved successfully",
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
+const deleteMyReviews = catchAsync(async (req, res) => {
+  const result = await reviewService.deleteMyReviews(req.params.id);
+  sendResponse(res, {
+    success: true,
+    message: "My Review is Deleted successfully",
+    statusCode: httpStatus.OK,
+    data: result,
+  });
+});
 
 export const reviewController = {
   createReview,
+  getMyReviews,
+  deleteMyReviews,
 };

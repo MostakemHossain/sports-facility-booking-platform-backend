@@ -6,6 +6,7 @@ const ReviewSchema = new Schema<TReview>(
     userId: {
       type: String,
       required: [true, "User ID is required"],
+      ref: "User",
     },
     email: {
       type: String,
