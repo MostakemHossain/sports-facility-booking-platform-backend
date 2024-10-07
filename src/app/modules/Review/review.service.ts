@@ -17,8 +17,14 @@ const deleteMyReviews = async (id: string) => {
   return result;
 };
 
+const updateMyReviews = async (id: string, payload: Partial<TReview>) => {
+  const result = await Review.findByIdAndUpdate(id, payload, { new: true });
+  return result;
+};
+
 export const reviewService = {
   createReview,
   getMyReviews,
   deleteMyReviews,
+  updateMyReviews,
 };
