@@ -3,8 +3,10 @@ import { bookingRoutes } from "../modules/Booking/Booking.routes";
 import { contactRoutes } from "../modules/Contact/contact.routes";
 import { employeeRoutes } from "../modules/Employee/employee.routes";
 import { facilityRoutes } from "../modules/Facility/facility.routes";
+import { OrderRoutes } from "../modules/Order/roder.routes";
 import { reviewRoutes } from "../modules/Review/review.routes";
 import { userRoutes } from "../modules/user/user.routes";
+import { paymentRoutes } from "../modules/payment/payment.routes";
 
 const router = express.Router();
 
@@ -32,6 +34,14 @@ const moduleRoutes = [
   {
     path: "/review",
     route: reviewRoutes,
+  },
+  {
+    path: "/order",
+    route: OrderRoutes,
+  },
+  {
+    path: "/payment",
+    route: paymentRoutes,
   },
 ];
 

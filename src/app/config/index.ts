@@ -18,4 +18,8 @@ export default {
   cloudinary_cloud_name: process.env.CLOUD_NAME,
   cloudinary_api_key: process.env.API_KEY,
   cloudinary_api_serect: process.env.API_SECRET,
+  PAYMENT_URL: process.env.PAYMENT_URL,
+  STORE_ID: process.env.STORE_ID,
+  SIGNATURE_KEY: process.env.SIGNATURE_KEY,
+  PAYMENT_VERIFY_URL: process.env.PAYMENT_VERIFY_URL,
 };

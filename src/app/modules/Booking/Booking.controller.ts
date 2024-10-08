@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import catchAsync from "../../shared/catchAsync";
@@ -30,7 +31,7 @@ const viewBookingByUser = catchAsync(
 );
 const viewBookingByAdmin = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
-    const user = req.user;
+  
     const result = await bookingService.viewBookingByAdmin();
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -57,7 +58,6 @@ const cancelABookingByUser = catchAsync(
 );
 const checkBookingAvailability = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
-    const user = req.user;
     const result = await bookingService.checkBookingAvailability(req);
     sendResponse(res, {
       statusCode: httpStatus.OK,
