@@ -8,21 +8,39 @@ import router from "./app/routes";
 // express
 const app = express();
 
+// Allowed origins for development and production
+const allowedOrigins = [
+  "https://sports-edge.vercel.app",
+  "http://localhost:5173",
+];
+
 // parsers
 app.use(express.json());
+
+// CORS configuration
 app.use(
   cors({
-    origin: "https://sports-edge.vercel.app",
-    // origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   })
 );
 
+// CORS headers for preflight requests
 app.use((req: Request, res: Response, next: NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "https://sports-edge.vercel.app");
-  // res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  const origin = req.headers.origin as string;
+
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -34,21 +52,23 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+// Cookie parser middleware
 app.use(cookieParser());
 
-// application routes
+// Application routes
 app.use("/api", router);
 
+// Test route
 app.get("/", (req: Request, res: Response) => {
   res.json({
     message: "Sports facility Booking platform........",
   });
 });
 
-// global error handler
+// Global error handler middleware
 app.use(globalErrorHandler);
 
-// not found route
+// Not found route handler
 app.use(notFound);
 
 export default app;
