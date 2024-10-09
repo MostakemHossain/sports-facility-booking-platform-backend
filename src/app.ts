@@ -8,7 +8,7 @@ import router from "./app/routes";
 // express
 const app = express();
 
-// Allowed origins for development and production
+
 const allowedOrigins = [
   "https://sports-edge.vercel.app",
   "http://localhost:5173",
@@ -33,7 +33,6 @@ app.use(
   })
 );
 
-// CORS headers for preflight requests
 app.use((req: Request, res: Response, next: NextFunction) => {
   const origin = req.headers.origin as string;
 

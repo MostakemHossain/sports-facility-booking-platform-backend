@@ -1,5 +1,7 @@
+import { Schema } from "mongoose";
+
 export type TReview = {
-  userId: string;
+  userId: Schema.Types.ObjectId;
   email: string;
   name: string;
   rating: number;
