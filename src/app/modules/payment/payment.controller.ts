@@ -1,4 +1,5 @@
-import httpStatus from "http-status";
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import catchAsync from "../../shared/catchAsync";
 import { paymentServices } from "./payment.service";
 
@@ -9,8 +10,7 @@ const confimationController = catchAsync(async (req, res) => {
     status as string,
     productId as string
   );
-  res.set("Content-Type", result.contentType);
-  res.status(httpStatus.OK).send(result.html);
+  res.send("<h1>Payment Success full</h1>");
 });
 
 export const paymentController = {
