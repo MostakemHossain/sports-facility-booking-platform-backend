@@ -133,6 +133,7 @@ const getMe = async (email: string) => {
   return user;
 };
 const updateMyProfile = async (user: any, req: any) => {
+  
   const userData = await User.findById(user.id);
 
   if (!userData) {

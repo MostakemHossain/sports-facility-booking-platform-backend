@@ -8,7 +8,6 @@ import router from "./app/routes";
 // express
 const app = express();
 
-
 const allowedOrigins = [
   "https://sports-edge.vercel.app",
   "http://localhost:5173",

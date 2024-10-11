@@ -38,6 +38,13 @@ const UserSchema = new Schema<TUser>(
     photo: {
       type: String,
     },
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+    },
+    bio: {
+      type: String,
+    },
   },
   {
     timestamps: true,

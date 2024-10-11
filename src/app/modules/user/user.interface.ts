@@ -7,6 +7,8 @@ export type TUser = {
   role: "admin" | "user" | "super-admin";
   address: string;
   photo: string;
+  gender: "male" | "female" | "other";
+  bio: string;
   createdAt: string;
   updatedAt: string;
   __v: string;
